@@ -23,3 +23,23 @@ struct utility_t {
     }
 
 }; inline utility_t utility;
+
+inline const char* const letters[] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, ("0"), ("1"), ("2"), ("3"), ("4"), ("5"), ("6"), ("7"), ("8"), ("9"), nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, ("a"), ("b"), ("c"), ("d"), ("e"), ("f"), ("g"), ("h"), ("i"), ("j"), ("k"), ("l"), ("m"), ("n"), ("o"), ("p"), ("q"), ("r"), ("s"),
+("t"), ("u"), ("v"), ("w"), ("x"),
+("y"), ("z"), nullptr, nullptr, nullptr, nullptr, nullptr, ("0"), ("1"), ("2"), ("3"), ("4"), ("5"), ("6"),
+("7"), ("8"), ("9"), nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr,nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, (";"), ("+"), (")"), ("-"), ("."), ("/?"), ("~"), nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, ("["), ("\\"), ("]"), ("'"), nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };

@@ -3,9 +3,12 @@
 #define IM_VEC2_CLASS_EXTRA
 #include "imgui.h"
 #include "imgui_internal.h"
+#include <string>
+#include <vector>
 
 struct globals_t {
     size_t blocking = 0;
+    bool skip = false;
 }; inline globals_t globals;
 
 struct drag_controller_t {
@@ -31,6 +34,11 @@ struct resize_controller_t {
     void call();
 };
 
+struct user_message_t {
+    std::string sender;
+    std::string message;
+};
+
 struct chat_t {
 
     ImVec2 position;
@@ -40,10 +48,18 @@ struct chat_t {
 
     resize_controller_t resize_controller;
 
+    // our main variables
+    std::string username;
+    std::string message_to_send;
+
+    // backend variables
+    float can_send_message_inerp = 0.f;
+    float button_hover_a = 0.f;
+
     // Set our variable n' what not
     bool render_start_complete = false;
-    void on_render_start(ImVec2 start_position, ImVec2 default_size);
+    void on_render_start(std::string client_username, ImVec2 start_position, ImVec2 default_size);
 
     // Main draw function
-    void think();
+    void think(std::vector<user_message_t>& messages);
 };
