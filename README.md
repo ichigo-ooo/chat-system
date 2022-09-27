@@ -1,3 +1,5 @@
 # chat-system
 
-Include into an imgui project - example: imgui demo window
+Uses the Dear ImGui library for its input and rendering
+
+Currently local only, server based messages will be implemented shortly
