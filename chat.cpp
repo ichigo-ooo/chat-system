@@ -7,6 +7,7 @@
 #include <WinUser.h>
 #include <winuser.rh>
 #include <algorithm>
+#include <iostream>
 
 std::string to_upper(std::string s)
 {
@@ -158,15 +159,16 @@ void chat_t::think(std::vector<user_message_t>& messages) {
 
     auto v = messages;
     std::reverse(v.begin(), v.end());
+
     int offset = 0;
 
-    draw_list->PushClipRect(position, position + size);
-
+    draw_list->PushClipRect(position + ImVec2(25, 0), position + ImVec2(size.x - 25, size.y - 65), true);
+    auto sizing = 0;
     for (size_t i = 0; i < messages.size(); i++) {
         auto invoke_message = [&](user_message_t message) -> void {
             bool is_self = message.sender == username;
 
-            auto pos = position + ImVec2(25, size.y - 120 - offset);
+            auto pos = position + ImVec2(25, size.y - 120 - offset + scroll_interp);
             auto it_size = ImGui::CalcTextSize(message.message.data()) + ImVec2(6, 8 + 12);
 
             it_size.x = ImClamp(it_size.x, ImGui::CalcTextSize(message.sender.data()).x + 6, size.x - 50);
@@ -185,6 +187,7 @@ void chat_t::think(std::vector<user_message_t>& messages) {
             draw_list->AddText(pos + ImVec2(3, 2 + 16), ImColor(180, 180, 180), message.message.data());
 
             offset += it_size.y + 10;
+            sizing += it_size.y + 10;
         };
         auto current_message = v.at(i);
         invoke_message(current_message);
@@ -192,5 +195,30 @@ void chat_t::think(std::vector<user_message_t>& messages) {
 
     draw_list->PopClipRect();
 
+    auto visible = size.y - 75 - 35;
+
+    if (sizing > visible && utility.mouse_in_contents(position, size)) {
+        auto wheel = ImGui::GetIO().MouseWheel * 8;
+        scroll_offset = ImClamp(scroll_offset + wheel, 0.f, sizing - visible);
+    }
+
+    if (sizing > visible) {
+        if (scroll_interp != scroll_offset) {
+            scroll_interp += (scroll_offset - scroll_interp) * 0.2f;
+        }
+
+        auto scroll_back_position = position + ImVec2(size.x - 16, 25);
+        auto scroll_back_size = ImVec2(8, visible);
+
+        auto scroll_position = position + ImVec2(size.x - 16, 25);
+        auto scroll_size = ImVec2(8, ((float)visible / (float)sizing) * visible);
+
+        auto scr_offset = (-(float)scroll_interp / (float)sizing) * (float)visible;
+
+        draw_list->AddRectFilled(scroll_back_position, scroll_back_position + scroll_back_size, ImColor(35, 39, 59), 3.f);
+        draw_list->AddRectFilled(scroll_position + ImVec2(0, visible + scr_offset - scroll_size.y), scroll_position + ImVec2(0, visible + scr_offset - scroll_size.y) + scroll_size, ImColor(55, 59, 79), 3.f);
+    }
+
     draw_list->AddRectFilledMultiColor(position + ImVec2(25, 0), position + ImVec2(size.x - 25, 80), ImColor(20, 25, 30), ImColor(20, 25, 30), ImColor(20, 25, 30, 0), ImColor(20, 25, 30, 0));
+    draw_list->AddRectFilledMultiColor(position + ImVec2(25, size.y - 65 - 25), position + ImVec2(25, size.y - 65), ImColor(220, 25, 30, 0), ImColor(220, 25, 30, 0), ImColor(220, 25, 30), ImColor(220, 25, 30));
 }

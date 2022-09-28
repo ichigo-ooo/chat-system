@@ -55,6 +55,8 @@ struct chat_t {
     // backend variables
     float can_send_message_inerp = 0.f;
     float button_hover_a = 0.f;
+    float scroll_offset = 0.f;
+    float scroll_interp = 0.f;
 
     // Set our variable n' what not
     bool render_start_complete = false;
