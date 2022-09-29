@@ -3,3 +3,5 @@
 Uses the [Dear ImGui](https://github.com/ocornut/imgui) library for its input and rendering.
 
 Local based chat system primarily made for fun
+
+Code may suck because I rush things.
